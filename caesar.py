@@ -5,6 +5,8 @@ Spyder Editor
 This is a temporary script file.
 """
 
+import math
+
 nato = "ALPHA BRAVO CHARLIE DELTA ECHO FOXTROT GOLF HOTEL INDIA JULIETT KILO LIMA MIKE NOVEMBER OSCAR PAPA QUEBEC ROMEO SIERRA TANGO UNIFORM VICTOR WHISKEY X-RAY YANKEE ZULU".split()
 morse = ".- -... -.-. -.. . ..-. --. .... .. .--- -.- .-.. -- -. --- .--. --.- .-. ... - ..- ...- .-- -..- -.-- --..".split()
 alph = "abcdefghijklmnopqrstuvwxyz"
@@ -66,3 +68,15 @@ def add_string(x,y,a=alph):
         else:
             rets += a[(score(k,range(len(a)),a)+score(l,range(len(a)),a)) % len(a)]
     return rets
+    
+def to_base_26(x):
+    dig = math.floor(math.log(x)/math.log(26))
+    rets = ""
+    for i in range(dig,-1,-1):
+        rets += alph[math.floor(x/(26**i))].upper()
+        x = x - math.floor(x/(26**i))*(26**i)
+    return rets
+
+def caesar_rainbow(s):
+    for i in range(26):
+        print(transliterate(s,alph,(alph+alph)[i:i+26]))
